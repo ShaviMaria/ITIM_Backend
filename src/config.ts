@@ -1,14 +1,7 @@
 import { config } from 'dotenv'
+import IEnvData from './models/envData'
 
 config()
-
-interface IEnvData {
-    host: string
-    database: string
-    user: string
-    password: string
-    secret_token_word: string
-}
 
 const envData: IEnvData = {
     host: process.env.HOST || "",
