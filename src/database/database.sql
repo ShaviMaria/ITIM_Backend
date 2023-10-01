@@ -4,13 +4,25 @@ CREATE DATABASE IF NOT EXISTS ITIM;
 
 USE ITIM;
 
+SELECT '3. Creating table Company';
+CREATE TABLE IF NOT EXISTS Company(
+    Id_Company BIGINT UNSIGNED AUTO_INCREMENT,
+    Name VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY(Id_Company)
+);
+
+SELECT '4. Creating table Property';
 CREATE TABLE IF NOT EXISTS Property(
     Id_Property BIGINT UNSIGNED AUTO_INCREMENT,
     Property_Code VARCHAR(50) UNIQUE NOT NULL,
     Name VARCHAR(50) NOT NULL,
-    PRIMARY KEY(Id_Property)
+    Company BIGINT UNSIGNED,
+    PRIMARY KEY(Id_Property),
+    CONSTRAINT Property_FK_Company
+    FOREIGN KEY(Company) REFERENCES Company(Id_Company) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '5. Creating table Departament';
 CREATE TABLE IF NOT EXISTS Departament(
     Id_Departament BIGINT UNSIGNED AUTO_INCREMENT,
     Departament VARCHAR(50) NOT NULL,
@@ -20,6 +32,7 @@ CREATE TABLE IF NOT EXISTS Departament(
     FOREIGN KEY(Property) REFERENCES Property(Id_Property) ON UPDATE CASCADE
 );
 
+SELECT '6. Creating table Google_Account';
 CREATE TABLE IF NOT EXISTS Google_Account(
     Id_Google_Account BIGINT UNSIGNED AUTO_INCREMENT,
     Google_Account VARCHAR(50) NOT NULL UNIQUE,
@@ -35,6 +48,7 @@ CREATE TABLE IF NOT EXISTS Google_Account(
     FOREIGN KEY(Property) REFERENCES Property(Id_Property) ON UPDATE CASCADE
 );
 
+SELECT '7. Creating table Phone_Line';
 CREATE TABLE IF NOT EXISTS Phone_Line(
     Id_Phone_Line BIGINT UNSIGNED AUTO_INCREMENT,
     Phone_Company VARCHAR(50) NOT NULL,
@@ -46,6 +60,7 @@ CREATE TABLE IF NOT EXISTS Phone_Line(
     PRIMARY KEY(Id_Phone_Line)
 );
 
+SELECT '8. Creating table Joint_Google_Account_Phone_Line';
 CREATE TABLE IF NOT EXISTS Join_Google_Account_Phone_Line(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Google_Account BIGINT UNSIGNED NOT NULL,
@@ -57,6 +72,7 @@ CREATE TABLE IF NOT EXISTS Join_Google_Account_Phone_Line(
     FOREIGN KEY(Id_Phone_Line) REFERENCES Phone_Line(Id_Phone_Line) ON UPDATE CASCADE
 );
 
+SELECT '9. Creating table Apple_ID';
 CREATE TABLE IF NOT EXISTS Apple_ID(
     Id_Apple_ID BIGINT UNSIGNED AUTO_INCREMENT,
     Apple_ID VARCHAR(50) NOT NULL UNIQUE,
@@ -78,6 +94,7 @@ CREATE TABLE IF NOT EXISTS Apple_ID(
     FOREIGN KEY(Property) REFERENCES Property(Id_Property) ON UPDATE CASCADE
 );
 
+SELECT '10. Creating table Join_Apple_ID_Phone_Line';
 CREATE TABLE IF NOT EXISTS Join_Apple_ID_Phone_Line(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Apple_ID BIGINT UNSIGNED NOT NULL,
@@ -89,12 +106,14 @@ CREATE TABLE IF NOT EXISTS Join_Apple_ID_Phone_Line(
     FOREIGN KEY(Id_Phone_Line) REFERENCES Phone_Line(Id_Phone_Line) ON UPDATE CASCADE
 );
 
+SELECT '11. Creating table TradeMark';
 CREATE TABLE IF NOT EXISTS TradeMark(
     Id_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark VARCHAR(20) NOT NULL UNIQUE,
     PRIMARY KEY(Id_TradeMark)
 );
 
+SELECT '12. Creating table Operating_System_TradeMark';
 CREATE TABLE IF NOT EXISTS Operating_System_TradeMark(
     Id_Operating_System_Trademark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -103,6 +122,7 @@ CREATE TABLE IF NOT EXISTS Operating_System_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '13. Creating table Server_TradeMark';
 CREATE TABLE IF NOT EXISTS Server_TradeMark(
     Id_Server_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED NOT NULL,
@@ -111,6 +131,7 @@ CREATE TABLE IF NOT EXISTS Server_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '14. Creating table UPS_TradeMark';
 CREATE TABLE IF NOT EXISTS UPS_TradeMark(
     Id_UPS_Trademark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -119,6 +140,7 @@ CREATE TABLE IF NOT EXISTS UPS_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '15. Creating table Monitor_TradeMark';
 CREATE TABLE IF NOT EXISTS Monitor_TradeMark(
     Id_Monitor_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -127,6 +149,7 @@ CREATE TABLE IF NOT EXISTS Monitor_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '16. Creating table CPU_TradeMark';
 CREATE TABLE IF NOT EXISTS CPU_TradeMark(
     Id_CPU_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -135,6 +158,7 @@ CREATE TABLE IF NOT EXISTS CPU_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '17. Creating table Cell_Phone_TradeMark';
 CREATE TABLE IF NOT EXISTS Cell_Phone_TradeMark(
     Id_Cell_Phone_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -143,6 +167,7 @@ CREATE TABLE IF NOT EXISTS Cell_Phone_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '18. Creating table Table_TradeMark';
 CREATE TABLE IF NOT EXISTS Tablet_TradeMark(
     Id_Tablet_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -151,6 +176,7 @@ CREATE TABLE IF NOT EXISTS Tablet_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '19. Creating table Phone_TradeMark';
 CREATE TABLE IF NOT EXISTS Phone_TradeMark(
     Id_Phone_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -159,6 +185,7 @@ CREATE TABLE IF NOT EXISTS Phone_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '20. Creating table PC_TradeMark';
 CREATE TABLE IF NOT EXISTS PC_TradeMark(
     Id_PC_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -167,6 +194,7 @@ CREATE TABLE IF NOT EXISTS PC_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '21. Creating table Printer_TradeMark';
 CREATE TABLE IF NOT EXISTS Printer_TradeMark(
     Id_Printer_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -175,6 +203,7 @@ CREATE TABLE IF NOT EXISTS Printer_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '22. Creating table Switch_TradeMark';
 CREATE TABLE IF NOT EXISTS Switch_TradeMark(
     Id_Switch_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -183,6 +212,7 @@ CREATE TABLE IF NOT EXISTS Switch_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '23. Creating table Router_TradeMark';
 CREATE TABLE IF NOT EXISTS Router_TradeMark(
     Id_Router_TradeMark BIGINT UNSIGNED AUTO_INCREMENT,
     TradeMark BIGINT UNSIGNED,
@@ -191,12 +221,14 @@ CREATE TABLE IF NOT EXISTS Router_TradeMark(
     FOREIGN KEY(TradeMark) REFERENCES TradeMark(Id_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '24. Creating table Model';
 CREATE TABLE IF NOT EXISTS Model(
     Id_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Model VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY(Id_Model)
 );
 
+SELECT '25. Creating table Server_Model';
 CREATE TABLE IF NOT EXISTS Server_Model(
     Id_Server_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Model BIGINT UNSIGNED NOT NULL,
@@ -208,6 +240,7 @@ CREATE TABLE IF NOT EXISTS Server_Model(
     FOREIGN KEY(TradeMark) REFERENCES Server_TradeMark(Id_Server_TradeMark) ON UPDATE CASCADE
 );
 
+SELECT '26. Creating table UPS_Model';
 CREATE TABLE IF NOT EXISTS UPS_Model(
     Id_UPS_Model BIGINT UNSIGNED AUTO_INCREMENT,
     VA VARCHAR(5),
@@ -220,6 +253,7 @@ CREATE TABLE IF NOT EXISTS UPS_Model(
     FOREIGN KEY(TradeMark) REFERENCES UPS_TradeMark(Id_UPS_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '27. Creating table Monitor_Model';
 CREATE TABLE IF NOT EXISTS Monitor_Model(
     Id_Monitor_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Refresh_Rate VARCHAR(10),
@@ -233,6 +267,7 @@ CREATE TABLE IF NOT EXISTS Monitor_Model(
     FOREIGN KEY(TradeMark) REFERENCES Monitor_TradeMark(Id_Monitor_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '28. Creating table CPU_Model';
 CREATE TABLE IF NOT EXISTS CPU_Model(
     Id_CPU_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Speed VARCHAR(5) NOT NULL,
@@ -246,6 +281,7 @@ CREATE TABLE IF NOT EXISTS CPU_Model(
     FOREIGN KEY(TradeMark) REFERENCES CPU_TradeMark(Id_CPU_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '29. Creating table Router_Model';
 CREATE TABLE IF NOT EXISTS Router_Model(
     Id_Router_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Speed VARCHAR(5) NOT NULL,
@@ -258,6 +294,20 @@ CREATE TABLE IF NOT EXISTS Router_Model(
     FOREIGN KEY(TradeMark) REFERENCES Router_TradeMark(Id_Router_Trademark) ON UPDATE CASCADE
 );
 
+#SELECT '30. Creating table Router_Model';
+#CREATE TABLE IF NOT EXISTS Router_Model(
+    #Id_Router_Model BIGINT UNSIGNED AUTO_INCREMENT,
+    #Speed VARCHAR(5) NOT NULL,
+    #Model BIGINT UNSIGNED NOT NULL,
+    #TradeMark BIGINT UNSIGNED NOT NULL,
+    #PRIMARY KEY(Id_Router_Model),
+    #CONSTRAINT Model_FK_Router_Model
+    #FOREIGN KEY(Model) REFERENCES Model(Id_Model) ON UPDATE CASCADE,
+    #CONSTRAINT TradeMark_FK_Router_Model
+    #FOREIGN KEY(TradeMark) REFERENCES Router_TradeMark(Id_Router_Trademark) ON UPDATE CASCADE
+#);
+
+SELECT '30. Creating table Switch_Model';
 CREATE TABLE IF NOT EXISTS Switch_Model(
     Id_Switch_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Speed VARCHAR(5) NOT NULL,
@@ -271,6 +321,7 @@ CREATE TABLE IF NOT EXISTS Switch_Model(
     FOREIGN KEY(TradeMark) REFERENCES Switch_TradeMark(Id_Switch_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '31. Creating table Printer_Model';
 CREATE TABLE IF NOT EXISTS Printer_Model(
     Id_Printer_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Type VARCHAR(10) NOT NULL,
@@ -283,6 +334,7 @@ CREATE TABLE IF NOT EXISTS Printer_Model(
     FOREIGN KEY(TradeMark) REFERENCES Printer_TradeMark(Id_Printer_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '32. Creating table PC_Model';
 CREATE TABLE IF NOT EXISTS PC_Model(
     Id_PC_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Type VARCHAR(10) NOT NULL,
@@ -295,6 +347,7 @@ CREATE TABLE IF NOT EXISTS PC_Model(
     FOREIGN KEY(TradeMark) REFERENCES PC_TradeMark(Id_PC_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '33. Creating table Phone_Model';
 CREATE TABLE IF NOT EXISTS Phone_Model(
     Id_Phone_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Type VARCHAR(20) NOT NULL,
@@ -307,6 +360,7 @@ CREATE TABLE IF NOT EXISTS Phone_Model(
     FOREIGN KEY(TradeMark) REFERENCES Phone_TradeMark(Id_Phone_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '34. Creating table Tablet_Model';
 CREATE TABLE IF NOT EXISTS Tablet_Model(
     Id_Tablet_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Model BIGINT UNSIGNED NOT NULL,
@@ -318,6 +372,7 @@ CREATE TABLE IF NOT EXISTS Tablet_Model(
     FOREIGN KEY(TradeMark) REFERENCES Tablet_TradeMark(Id_Tablet_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '35. Creating table Cell_Phone_Model';
 CREATE TABLE IF NOT EXISTS Cell_Phone_Model(
     Id_Cell_Phone_Model BIGINT UNSIGNED AUTO_INCREMENT,
     Model BIGINT UNSIGNED NOT NULL,
@@ -329,6 +384,7 @@ CREATE TABLE IF NOT EXISTS Cell_Phone_Model(
     FOREIGN KEY(TradeMark) REFERENCES Cell_Phone_TradeMark(Id_Cell_Phone_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '36. Creating table HostName';
 CREATE TABLE IF NOT EXISTS HostName(
     Id_HostName BIGINT UNSIGNED AUTO_INCREMENT,
     HostName VARCHAR(50) NOT NULL UNIQUE,
@@ -339,6 +395,7 @@ CREATE TABLE IF NOT EXISTS HostName(
     FOREIGN KEY(Property) REFERENCES Property(Id_Property) ON UPDATE CASCADE
 );
 
+SELECT '37. Creating table Operating_System';
 CREATE TABLE IF NOT EXISTS Operating_System(
     Id_Operating_System BIGINT UNSIGNED AUTO_INCREMENT,
     Operating_System VARCHAR(20) NOT NULL UNIQUE,
@@ -349,6 +406,7 @@ CREATE TABLE IF NOT EXISTS Operating_System(
     FOREIGN KEY(TradeMark) REFERENCES Operating_System_TradeMark(Id_Operating_System_Trademark) ON UPDATE CASCADE
 );
 
+SELECT '38. Creating table IP_Address';
 CREATE TABLE IF NOT EXISTS IP_Address(
     Id_IP_Address BIGINT UNSIGNED AUTO_INCREMENT,
     IP_Address VARCHAR(20) NOT NULL UNIQUE,
@@ -356,6 +414,7 @@ CREATE TABLE IF NOT EXISTS IP_Address(
     PRIMARY KEY(Id_IP_Address)
 );
 
+SELECT '39. Creating table Network';
 CREATE TABLE IF NOT EXISTS Network(
     Id_Network BIGINT UNSIGNED AUTO_INCREMENT,
     Name VARCHAR(20) NOT NULL,
@@ -372,10 +431,12 @@ CREATE TABLE IF NOT EXISTS Network(
     FOREIGN KEY(IP_Address) REFERENCES IP_Address(Id_IP_Address) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '40. Altering table IP_Address Adding Column Network';
 ALTER TABLE IP_Address ADD COLUMN Network BIGINT UNSIGNED NOT NULL,
 ADD CONSTRAINT Network_FK_IP_Address
 FOREIGN KEY(Network) REFERENCES Network(Id_Network) ON UPDATE CASCADE ON DELETE CASCADE;
 
+SELECT '41. Creating table Join_Network_IP_Address_as_DHCP_Server';
 CREATE TABLE IF NOT EXISTS Join_Network_IP_Address_as_DHCP_Server(
     Id_DHCP_Server BIGINT UNSIGNED AUTO_INCREMENT,
     Id_IP_Address BIGINT UNSIGNED,
@@ -387,6 +448,7 @@ CREATE TABLE IF NOT EXISTS Join_Network_IP_Address_as_DHCP_Server(
     FOREIGN KEY(Id_Network) REFERENCES Network(Id_Network) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '42. Creating table Join_Network_IP_Address_as_Broadcast';
 CREATE TABLE IF NOT EXISTS Join_Network_IP_Address_as_Broadcast(
     Id_Broadcast BIGINT UNSIGNED AUTO_INCREMENT,
     Id_IP_Address BIGINT UNSIGNED NOT NULL,
@@ -398,6 +460,7 @@ CREATE TABLE IF NOT EXISTS Join_Network_IP_Address_as_Broadcast(
     FOREIGN KEY(Id_Network) REFERENCES Network(Id_Network) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '43. Creating table Join_Network_IP_Address_as_Gateway';
 CREATE TABLE IF NOT EXISTS Join_Network_IP_Address_as_Gateway(
     Id_Gateway BIGINT UNSIGNED AUTO_INCREMENT,
     Id_IP_Address BIGINT UNSIGNED NOT NULL,
@@ -409,6 +472,7 @@ CREATE TABLE IF NOT EXISTS Join_Network_IP_Address_as_Gateway(
     FOREIGN KEY(Id_Network) REFERENCES Network(Id_Network) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '44. Creating table UPS';
 CREATE TABLE IF NOT EXISTS UPS(
     Id_UPS BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL,
@@ -425,6 +489,7 @@ CREATE TABLE IF NOT EXISTS UPS(
     FOREIGN KEY(Model) REFERENCES UPS_Model(Id_UPS_Model) ON UPDATE CASCADE
 );
 
+SELECT '45. Creating table User';
 CREATE TABLE IF NOT EXISTS User(
     Id_User BIGINT UNSIGNED AUTO_INCREMENT,
     Employee_Number VARCHAR(20) NOT NULL UNIQUE,
@@ -454,6 +519,7 @@ CREATE TABLE IF NOT EXISTS User(
     FOREIGN KEY(Departament) REFERENCES Departament(Id_Departament) ON UPDATE CASCADE
 );
 
+SELECT '46. Creating table Cell_Phone';
 CREATE TABLE IF NOT EXISTS Cell_Phone(
     Id_Cell_Phone BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) UNIQUE,
@@ -480,6 +546,7 @@ CREATE TABLE IF NOT EXISTS Cell_Phone(
     FOREIGN KEY(Apple_ID) REFERENCES Apple_ID(Id_Apple_ID) ON UPDATE CASCADE
 );
 
+SELECT '47. Creating table Tablet';
 CREATE TABLE IF NOT EXISTS Tablet(
     Id_Tablet BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL UNIQUE,
@@ -504,6 +571,7 @@ CREATE TABLE IF NOT EXISTS Tablet(
     FOREIGN KEY(Apple_ID) REFERENCES Apple_ID(Id_Apple_ID) ON UPDATE CASCADE
 );
 
+SELECT '48. Creating table Extension';
 CREATE TABLE IF NOT EXISTS Extension(
     Id_Extension BIGINT UNSIGNED AUTO_INCREMENT,
     Extension VARCHAR(10) NOT NULL UNIQUE,
@@ -515,6 +583,7 @@ CREATE TABLE IF NOT EXISTS Extension(
     FOREIGN KEY(Phone_Line) REFERENCES Phone_Line(Id_Phone_Line) ON UPDATE CASCADE
 );
 
+SELECT '49. Creating table Phone';
 CREATE TABLE IF NOT EXISTS Phone(
     Id_Phone BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL UNIQUE,
@@ -539,6 +608,7 @@ CREATE TABLE IF NOT EXISTS Phone(
     FOREIGN KEY(Model) REFERENCES Phone_Model(Id_Phone_Model) ON UPDATE CASCADE
 );
 
+SELECT '50. Creating table PC';
 CREATE TABLE IF NOT EXISTS PC(
     Id_PC BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) UNIQUE,
@@ -572,6 +642,7 @@ CREATE TABLE IF NOT EXISTS PC(
     FOREIGN KEY(Model) REFERENCES PC_Model(Id_PC_Model) ON UPDATE CASCADE
 );
 
+SELECT '51. Creating table Join_Operating_System_PC';
 CREATE TABLE IF NOT EXISTS Join_Operating_System_PC(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Operating_System BIGINT UNSIGNED NOT NULL,
@@ -583,6 +654,7 @@ CREATE TABLE IF NOT EXISTS Join_Operating_System_PC(
     FOREIGN KEY(Id_PC) REFERENCES PC(Id_PC) ON UPDATE CASCADE
 );
 
+SELECT '52. Creating table Printer';
 CREATE TABLE IF NOT EXISTS Printer(
     Id_Printer BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL UNIQUE,
@@ -607,6 +679,7 @@ CREATE TABLE IF NOT EXISTS Printer(
     FOREIGN KEY(Model) REFERENCES Printer_Model(Id_Printer_Model) ON UPDATE CASCADE
 );
 
+SELECT '53. Creating table Switch';
 CREATE TABLE IF NOT EXISTS Switch(
     Id_Switch BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL UNIQUE,
@@ -626,6 +699,7 @@ CREATE TABLE IF NOT EXISTS Switch(
     FOREIGN KEY(Model) REFERENCES Switch_Model(Id_Switch_Model) ON UPDATE CASCADE
 );
 
+SELECT '54. Creating table Router';
 CREATE TABLE IF NOT EXISTS Router(
     Id_Router BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL UNIQUE,
@@ -642,6 +716,7 @@ CREATE TABLE IF NOT EXISTS Router(
     FOREIGN KEY(Model) REFERENCES Router_Model(Id_Router_Model) ON UPDATE CASCADE
 );
 
+SELECT '55. Creating table Monitor';
 CREATE TABLE IF NOT EXISTS Monitor(
     Id_Monitor BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) NOT NULL UNIQUE,
@@ -661,6 +736,7 @@ CREATE TABLE IF NOT EXISTS Monitor(
     FOREIGN KEY(Model) REFERENCES Monitor_Model(Id_Monitor_Model) ON UPDATE CASCADE
 );
 
+SELECT '56. Creating table Server';
 CREATE TABLE IF NOT EXISTS Server(
     Id_Server BIGINT UNSIGNED AUTO_INCREMENT,
     Serial_Number VARCHAR(50) UNIQUE,
@@ -693,6 +769,7 @@ CREATE TABLE IF NOT EXISTS Server(
     FOREIGN KEY(Model) REFERENCES Server_Model(Id_Server_Model) ON UPDATE CASCADE
 );
 
+SELECT '57. Creating table System_User';
 CREATE TABLE IF NOT EXISTS System_User(
     Id_System_User BIGINT UNSIGNED AUTO_INCREMENT,
     Password TEXT NOT NULL,
@@ -704,12 +781,14 @@ CREATE TABLE IF NOT EXISTS System_User(
     FOREIGN KEY(User) REFERENCES User(Id_User) ON UPDATE CASCADE
 );
 
+SELECT '58. Creating table System_Section';
 CREATE TABLE IF NOT EXISTS System_Section(
     Id_System_Section BIGINT UNSIGNED AUTO_INCREMENT,
     Section VARCHAR(20) NOT NULL,
     PRIMARY KEY(Id_System_Section)
 );
 
+SELECT '59. Creating table Event';
 CREATE TABLE IF NOT EXISTS Event(
     Id_Event BIGINT UNSIGNED AUTO_INCREMENT,
     Event VARCHAR(50) NOT NULL,
@@ -721,6 +800,7 @@ CREATE TABLE IF NOT EXISTS Event(
     FOREIGN KEY(User) REFERENCES System_User(Id_System_User) ON UPDATE CASCADE
 );
 
+SELECT '60. Creating table Join_System_User_System_Section';
 CREATE TABLE IF NOT EXISTS Join_System_User_System_Section(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_System_User BIGINT UNSIGNED NOT NULL,
@@ -732,6 +812,7 @@ CREATE TABLE IF NOT EXISTS Join_System_User_System_Section(
     FOREIGN KEY(Id_System_Section) REFERENCES System_Section(Id_System_Section) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '61. Creating table Join_System_User_Property';
 CREATE TABLE IF NOT EXISTS Join_System_User_Property(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_System_User BIGINT UNSIGNED NOT NULL,
@@ -743,6 +824,7 @@ CREATE TABLE IF NOT EXISTS Join_System_User_Property(
     FOREIGN KEY(Id_Property) REFERENCES Property(Id_Property) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT '62. Creating table Join_User_Event';
 CREATE TABLE IF NOT EXISTS Join_User_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_User BIGINT UNSIGNED NOT NULL,
@@ -754,6 +836,7 @@ CREATE TABLE IF NOT EXISTS Join_User_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '63. Creating table Join_Cell_Phone_Event';
 CREATE TABLE IF NOT EXISTS Join_Cell_Phone_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Cell_Phone BIGINT UNSIGNED NOT NULL,
@@ -765,6 +848,7 @@ CREATE TABLE IF NOT EXISTS Join_Cell_Phone_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '64. Creating table Join_Tablet_Event';
 CREATE TABLE IF NOT EXISTS Join_Tablet_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Tablet BIGINT UNSIGNED NOT NULL,
@@ -776,6 +860,7 @@ CREATE TABLE IF NOT EXISTS Join_Tablet_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '65. Creating table Join_Phone_Event';
 CREATE TABLE IF NOT EXISTS Join_Phone_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Phone BIGINT UNSIGNED NOT NULL,
@@ -787,6 +872,7 @@ CREATE TABLE IF NOT EXISTS Join_Phone_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '66. Creating table Join_Phone_Event';
 CREATE TABLE IF NOT EXISTS Join_PC_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_PC BIGINT UNSIGNED NOT NULL,
@@ -798,6 +884,7 @@ CREATE TABLE IF NOT EXISTS Join_PC_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '67. Creating table Join_Printer_Event';
 CREATE TABLE IF NOT EXISTS Join_Printer_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Printer BIGINT UNSIGNED NOT NULL,
@@ -809,6 +896,7 @@ CREATE TABLE IF NOT EXISTS Join_Printer_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '68. Creating table Join_Switch_Event';
 CREATE TABLE IF NOT EXISTS Join_Switch_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Switch BIGINT UNSIGNED NOT NULL,
@@ -820,6 +908,7 @@ CREATE TABLE IF NOT EXISTS Join_Switch_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '69. Creating table Join_Router_Event';
 CREATE TABLE IF NOT EXISTS Join_Router_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Router BIGINT UNSIGNED NOT NULL,
@@ -831,6 +920,7 @@ CREATE TABLE IF NOT EXISTS Join_Router_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '70. Creating table Join_Monitor_Event';
 CREATE TABLE IF NOT EXISTS Join_Monitor_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Monitor BIGINT UNSIGNED NOT NULL,
@@ -842,6 +932,7 @@ CREATE TABLE IF NOT EXISTS Join_Monitor_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '71. Creating table Join_UPS_Event';
 CREATE TABLE IF NOT EXISTS Join_UPS_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_UPS BIGINT UNSIGNED NOT NULL,
@@ -853,6 +944,7 @@ CREATE TABLE IF NOT EXISTS Join_UPS_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '72. Creating table Join_Server_Event';
 CREATE TABLE IF NOT EXISTS Join_Server_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Server BIGINT UNSIGNED NOT NULL,
@@ -864,6 +956,7 @@ CREATE TABLE IF NOT EXISTS Join_Server_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '73. Creating table Join_System_User_Event';
 CREATE TABLE IF NOT EXISTS Join_System_User_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_System_User BIGINT UNSIGNED NOT NULL,
@@ -875,6 +968,7 @@ CREATE TABLE IF NOT EXISTS Join_System_User_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '74. Creating table Join_Property_Event';
 CREATE TABLE IF NOT EXISTS Join_Property_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Property BIGINT UNSIGNED,
@@ -886,6 +980,7 @@ CREATE TABLE IF NOT EXISTS Join_Property_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '75. Creating table Join_Departament_Event';
 CREATE TABLE IF NOT EXISTS Join_Departament_Event(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Departament BIGINT UNSIGNED NOT NULL,
@@ -897,6 +992,7 @@ CREATE TABLE IF NOT EXISTS Join_Departament_Event(
     FOREIGN KEY(Id_Event) REFERENCES Event(Id_Event) ON UPDATE CASCADE
 );
 
+SELECT '76. Creating table Join_IP_Address_Router';
 CREATE TABLE IF NOT EXISTS Join_IP_Address_Router(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_IP_Address BIGINT UNSIGNED NOT NULL,
@@ -908,6 +1004,7 @@ CREATE TABLE IF NOT EXISTS Join_IP_Address_Router(
     FOREIGN KEY(Id_Router) REFERENCES Router(Id_Router) ON UPDATE CASCADE
 );
 
+SELECT '77. Creating table Join_User_PC';
 CREATE TABLE IF NOT EXISTS Join_User_PC(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_User BIGINT UNSIGNED NOT NULL,
@@ -919,6 +1016,7 @@ CREATE TABLE IF NOT EXISTS Join_User_PC(
     FOREIGN KEY(Id_PC) REFERENCES PC(Id_PC) ON UPDATE CASCADE
 );
 
+SELECT '78. Creating table Join_Tablet_Google_Account';
 CREATE TABLE IF NOT EXISTS Join_Tablet_Google_Account(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Google_Account BIGINT UNSIGNED NOT NULL,
@@ -930,6 +1028,7 @@ CREATE TABLE IF NOT EXISTS Join_Tablet_Google_Account(
     FOREIGN KEY(Id_Tablet) REFERENCES Tablet(Id_Tablet) ON UPDATE CASCADE
 );
 
+SELECT '79. Creating table Join_Cell_Phone_Google_Account';
 CREATE TABLE IF NOT EXISTS Join_Cell_Phone_Google_Account(
     Id_Join BIGINT UNSIGNED AUTO_INCREMENT,
     Id_Google_Account BIGINT UNSIGNED NOT NULL,
@@ -942,14 +1041,28 @@ CREATE TABLE IF NOT EXISTS Join_Cell_Phone_Google_Account(
 );
 
 
+SELECT '80. Creating user administrator';
 CREATE USER 'administrator'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Roll$371415';
-GRANT ALL PRIVILEGES ON MIT . * TO 'administrator'@'localhost';
 
-INSERT INTO Property VALUES(NULL, '5836', 'Paradisus Cancún');
-INSERT INTO Property VALUES(NULL, '6167', 'Circle by Melia Cancún');
+SELECT '81. Granting privileges to administrador';
+GRANT ALL PRIVILEGES ON ITIM . * TO 'administrator'@'localhost';
 
+SELECT '81. Inserting JM-Tech Company, (Data test)';
+INSERT INTO Company VALUES(
+    NULL,
+    'JM-Tech'
+);
+
+SELECT '82. Inserting Property Oficinas Cancún, (Data test)';
+INSERT INTO Property VALUES(NULL, '3515', 'Oficinas Cancún', 1);
+
+SELECT '83. Inserting Property Oficinas Playa del Carmen, (Data test)';
+INSERT INTO Property VALUES(NULL, '3312', 'Oficinas Playa del Carmen', 1);
+
+SELECT '84. Inserting Departament Sistemas, (Data test)';
 INSERT INTO Departament VALUES(NULL, 'Sistemas', 1);
 
+SELECT '85. Inserting User 3066976, (Data test)';
 INSERT INTO User VALUES(
     NULL,
     '3066976',
@@ -974,6 +1087,7 @@ INSERT INTO User VALUES(
     1
 );
 
+SELECT '86. Inserting User 3066978, (Data test)';
 INSERT INTO User VALUES(
     NULL,
     '3066978',
@@ -997,6 +1111,8 @@ INSERT INTO User VALUES(
     NULL,
     1
 );
+
+SELECT '87. Inserting System_User 1, (Data test)';
 INSERT INTO System_User (Password, User_Type, User) VALUES(
     'd26566fac1aa1773fb4e4a1f5591dbe8',
     'Administrator',
@@ -1004,48 +1120,72 @@ INSERT INTO System_User (Password, User_Type, User) VALUES(
 );
 
 #Temp Insertions to next comment
+SELECT '88. Inserting System_Section Home, (Data test)';
 INSERT INTO System_Section VALUES(null, "Home");
+
+SELECT '89. Inserting System_Section Properties, (Data test)';
 INSERT INTO System_Section VALUES(null, "Properties");
+
+SELECT '90. Inserting System_Section Networks, (Data test)';
 INSERT INTO System_Section VALUES(null, "Networks");
+
+SELECT '91. Inserting System_Section Events, (Data test)';
 INSERT INTO System_Section VALUES(null, "Events");
+
+SELECT '92. Inserting System_Section Users, (Data test)';
 INSERT INTO System_Section VALUES(null, "Users");
 
+SELECT '93. Inserting Join_System_User_System_Section Join 1 - 1, (Data test)';
 INSERT INTO Join_System_User_System_Section VALUES(null, 1, 1);
+
+SELECT '94. Inserting Join_System_User_System_Section Join 1 - 2, (Data test)';
 INSERT INTO Join_System_User_System_Section VALUES(null, 1, 2);
+
+SELECT '95. Inserting Join_System_User_System_Section Join 1 - 3, (Data test)';
 INSERT INTO Join_System_User_System_Section VALUES(null, 1, 3);
+
+SELECT '96. Inserting Join_System_User_System_Section Join 1 - 4, (Data test)';
 INSERT INTO Join_System_User_System_Section VALUES(null, 1, 4);
+
+SELECT '97. Inserting Join_System_User_System_Section Join 1 - 5, (Data test)';
 INSERT INTO Join_System_User_System_Section VALUES(null, 1, 5);
 
+
+SELECT '98. Inserting Event Creación de Propiedad, (Data test)';
 #Evento_1
 INSERT INTO Event VALUES(
     NULL,
     'Creación de Propiedad',
     '2023-07-01',
-    'Creación de Propiedad 5836 Paradisus Cancún automaticamente por sistema',
+    'Creación de Propiedad 3515 Oficinas Cancún automaticamente por sistema',
     1
 );
 
+SELECT '99. Inserting Event Creación de Propiedad, (Data test)';
 #Evento_2
 INSERT INTO Event VALUES(
     NULL,
     'Creación de Propiedad',
     '2023-07-01',
-    'Creación de Propiedad 6167 Circle by Melia Cancún automaticamente por sistema',
+    'Creación de Propiedad 3312 Oficinas Playa del Carmen automaticamente por sistema',
     1
 );
 
+SELECT '100. Relating Property with event, (Data test)';
 INSERT INTO Join_Property_Event VALUES(
     NULL,
     1,
     1
 );
 
+SELECT '101. Relating Property with event, (Data test)';
 INSERT INTO Join_Property_Event VALUES(
     NULL,
     2,
     2
 );
 
+SELECT '102. Inserting Event Creación de Departamento, (Data test)';
 #Evento_3
 INSERT INTO Event VALUES(
     NULL,
@@ -1055,12 +1195,14 @@ INSERT INTO Event VALUES(
     1
 );
 
+SELECT '103. Relating Departament with event, (Data test)';
 INSERT INTO Join_Departament_Event VALUES(
     NULL,
     1,
     3
 );
 
+SELECT '104. Inserting Event Creación de Usuario, (Data test)';
 #Evento_4
 INSERT INTO Event VALUES(
     NULL,
@@ -1070,12 +1212,14 @@ INSERT INTO Event VALUES(
     1
 );
 
+SELECT '105. Relating User with event, (Data test)';
 INSERT INTO Join_User_Event VALUES(
     NULL,
     1,
     4
 );
 
+SELECT '106. Inserting event Creación de Usuario de sistema, (Data test)';
 #Evento_5
 INSERT INTO Event VALUES(
     NULL,
@@ -1085,6 +1229,7 @@ INSERT INTO Event VALUES(
     1
 );
 
+SELECT '107. Relating System_User with event, (Data test)';
 INSERT INTO Join_System_User_Event VALUES(
     NULL,
     1,
@@ -1092,8 +1237,8 @@ INSERT INTO Join_System_User_Event VALUES(
 );
 
 
+SELECT '108. Creating View System_Users'; 
 #VIEWS
-
 CREATE VIEW System_Users AS
 SELECT System_User.Id_System_User,
        User.Name,
@@ -1106,6 +1251,7 @@ SELECT System_User.Id_System_User,
        User.Id_User
        FROM User inner join System_User ON User.Id_User = System_User.User;
 
+SELECT '109. Creating View System_User_Events'; 
 CREATE VIEW System_User_Events AS SELECT 
 	System_User.Id_System_User,
     System_User.User_Type,
@@ -1120,6 +1266,7 @@ CREATE VIEW System_User_Events AS SELECT
     User.Windows_User
 	FROM System_User INNER JOIN Join_System_User_Event ON System_User.Id_System_User = Join_System_User_Event.Id_System_User INNER JOIN Event ON Event.Id_Event = Join_System_User_Event.Id_Event INNER JOIN User ON User.Id_User = System_User.User;
 
+SELECT '110. Creating View Property_Events'; 
 CREATE VIEW Property_Events AS SELECT 
 	Property.Id_Property,
     Property.Property_Code,
@@ -1135,6 +1282,7 @@ CREATE VIEW Property_Events AS SELECT
     User.Windows_User
 	FROM Property INNER JOIN Join_Property_Event ON Property.Id_Property = Join_Property_Event.Id_Property INNER JOIN Event ON Event.Id_Event = Join_Property_Event.Id_Event INNER JOIN User ON User.Id_User = Event.User;
 
+SELECT '111. Creating View Partial_Networks'; 
 CREATE VIEW Partial_Networks AS SELECT
     Property.Property_Code AS Property_Code,
     Property.Name AS Property_Name,
@@ -1147,21 +1295,25 @@ CREATE VIEW Partial_Networks AS SELECT
     IP_Address.IP_Address AS Network_Address
     FROM Network JOIN IP_Address ON Network.IP_Address = IP_Address.Id_IP_Address AND Network.Id_Network = IP_Address.Network JOIN Property ON Property.Id_Property = Network.Property;
 
+SELECT '112. Creating View Broadcast'; 
 CREATE VIEW Broadcast AS SELECT
 	Network.Id_Network,
     IP_Address.IP_Address AS Broadcast
 	FROM Network JOIN Join_Network_IP_Address_as_Broadcast ON Network.Id_Network = Join_Network_IP_Address_as_Broadcast.Id_Network JOIN IP_Address ON Join_Network_IP_Address_as_Broadcast.Id_IP_Address = IP_Address.Id_IP_Address;
 
+SELECT '113. Creating View Gateway'; 
 CREATE VIEW Gateway AS SELECT
 	Network.Id_Network,
     IP_Address.IP_Address AS Gateway
 	FROM Network JOIN Join_Network_IP_Address_as_Gateway ON Network.Id_Network = Join_Network_IP_Address_as_Gateway.Id_Network JOIN IP_Address ON Join_Network_IP_Address_as_Gateway.Id_IP_Address = IP_Address.Id_IP_Address;
 
+SELECT '114. Creating View DHCP_Server'; 
 CREATE VIEW DHCP_Server AS SELECT
 	Network.Id_Network,
     IP_Address.IP_Address AS DHCP_Server
 	FROM Network JOIN Join_Network_IP_Address_as_DHCP_Server ON Network.Id_Network = Join_Network_IP_Address_as_DHCP_Server.Id_Network JOIN IP_Address ON Join_Network_IP_Address_as_DHCP_Server.Id_IP_Address = IP_Address.Id_IP_Address;
 
+SELECT '115. Creating View Networks'; 
 CREATE VIEW Networks AS SELECT
 	Partial_Networks.Id_Network,
     Partial_Networks.Property_Code,
@@ -1176,6 +1328,7 @@ CREATE VIEW Networks AS SELECT
 		FROM Partial_Networks JOIN Broadcast
 			ON Partial_Networks.Id_Network = Broadcast.Id_Network;
 
+SELECT '116. Creating View Gateways_Address'; 
  CREATE VIEW Gateways_Address AS SELECT
     IP_Address.Id_IP_Address,
     IP_Address.IP_Address,
@@ -1187,17 +1340,28 @@ CREATE VIEW Networks AS SELECT
 
 
 #DataTemp
-#INSERT INTO Network VALUES(null, 'Red 19', '255.255.255.0', '24', 254, 256, null, 1);
-#INSERT INTO Network VALUES(null, 'Red de Club', '255.255.255.0', '24', 254, 256, null, 2);
-#INSERT INTO IP_Address VALUES(null, '10.0.19.0', 0, 1);
-#INSERT INTO IP_Address VALUES(null, '10.0.19.255', 0, 1);
-#INSERT INTO IP_Address VALUES(null, '10.0.19.108', 0, 1);
-#INSERT INTO IP_Address VALUES(null, '10.0.19.1', 0, 1);
-#INSERT INTO IP_Address VALUES(null, '10.1.50.0', 0, 2);
-#INSERT INTO IP_Address VALUES(null, '10.1.50.255', 0, 2);
-#INSERT INTO IP_Address VALUES(null, '10.1.50.1', 0, 2);
-#UPDATE Network SET IP_Address = 1 WHERE Id_Network = 1;
-#UPDATE Network SET IP_Address = 5 WHERE Id_Network = 2;
+#SELECT '117. Inserting Network Red Administrativa, (Data Test)'; 
+##INSERT INTO Network VALUES(null, 'Red Administrativa', '255.255.255.0', '24', 254, 256, null, 1);
+#SELECT '118. Inserting Network Red Administrativa 2, (Data Test)'; 
+##INSERT INTO Network VALUES(null, 'Red Administrativa 2', '255.255.255.0', '24', 254, 256, null, 2);
+#SELECT '119. Inserting IP_Address 10.0.19.0, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.0.19.0', 0, 1);
+#SELECT '120. Inserting IP_Address 10.0.19.255, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.0.19.255', 0, 1);
+#SELECT '121. Inserting IP_Address 10.0.19.108, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.0.19.108', 0, 1);
+#SELECT '122. Inserting IP_Address 10.0.19.1, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.0.19.1', 0, 1);
+#SELECT '123. Inserting IP_Address 10.1.50.0, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.1.50.0', 0, 2);
+#SELECT '124. Inserting IP_Address 10.1.50.255, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.1.50.255', 0, 2);
+#SELECT '125. Inserting IP_Address 10.1.50.1, (Data Test)'; 
+##INSERT INTO IP_Address VALUES(null, '10.1.50.1', 0, 2);
+#SELECT '126. Updating IP_Address 1, (Data Test)'; 
+##UPDATE Network SET IP_Address = 1 WHERE Id_Network = 1;
+#SELECT '126. Updating IP_Address 2, (Data Test)'; 
+##UPDATE Network SET IP_Address = 5 WHERE Id_Network = 2;
 
 
 ##INSERT INTO Join_Network_IP_Address_as_DHCP_Server VALUES(null, null, 1);
