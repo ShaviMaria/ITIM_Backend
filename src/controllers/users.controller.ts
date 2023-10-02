@@ -28,7 +28,12 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
         const result = await connection.query(query)
 
         if(result.length > 0) {
-            const payload: ISystemUser = result[0]
+            const payload: ISystemUser = {
+                id: result[0].Id_System_User,
+                user: result[0].User_Code,
+                userType: result[0].User_Type,
+                Language: result[0].Language
+            }
             const token = jwt.sign(payload, envData.secret_token_word, { expiresIn: '2h'})
             res.send({
                 message: 'SingUp Successfully',

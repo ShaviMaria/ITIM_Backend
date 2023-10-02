@@ -1,7 +1,8 @@
 interface ISystemUser {
     id?: number
-    user: string
-    password: string
+    user?: string
+    email?: string
+    password?: string
     userName?: string
     userType?: string
     Language?: string
