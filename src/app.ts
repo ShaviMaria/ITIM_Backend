@@ -2,7 +2,7 @@ import express, { Application } from 'express'
 import morgan from 'morgan'
 
 //Import Routes
-
+import usersRouter from './routes/users.routes'
 
 const app: Application = express()
 
@@ -21,6 +21,6 @@ app.use((_req, res, next) => {
 });
 
 //Routes
-
+app.use('/api/Users', usersRouter)
 
 export default app
