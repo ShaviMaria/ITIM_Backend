@@ -5,7 +5,7 @@ import ISystemUser from '../models/systemUser'
 import jwt from 'jsonwebtoken'
 import envData from '../config'
 
-const signUp = async (req: Request, res: Response): Promise<void> => {
+const signIn = async (req: Request, res: Response): Promise<void> => {
     try {
         if(!req.body.user) {
             res.status(401).json({ message: 'Request error: please add a user property to body' })
@@ -46,5 +46,5 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
 }
 
 export const methods = {
-    signUp
+    signIn
 }
