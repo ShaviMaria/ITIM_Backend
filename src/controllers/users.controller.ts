@@ -31,6 +31,7 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
             const payload: ISystemUser = {
                 id: result[0].Id_System_User,
                 user: result[0].User_Code,
+                email: result[0].Email,
                 userType: result[0].User_Type,
                 Language: result[0].Language
             }
