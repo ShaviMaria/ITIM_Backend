@@ -8,7 +8,7 @@ const envData: IEnvData = {
     database: process.env.DATABASE || "",
     user: process.env.UUSER || "",
     password: process.env.PASSWORD || "",
-    secret_token_word: process.env.SECRET_WORD_PASSWORD || ""
+    secret_token_word: process.env.SECRET_TOKEN_WORD || ""
 }
 
 if (envData.host === "") {
