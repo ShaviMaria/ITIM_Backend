@@ -36,9 +36,21 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
                 Language: result[0].Language
             }
             const token = jwt.sign(payload, envData.secret_token_word, { expiresIn: '2h'})
+
+            //Object user that will be send to api client
+            const userToSend: ISystemUser ={
+                user: result[0].User_Code,
+                name: result[0].Name,
+                firstSurname: result[0].First_Surname,
+                secondSurname: result[0].Second_Surname,
+                email: result[0].Email,
+                userType: result[0].User_Type,
+                Language: result[0].Language
+            }
             res.send({
                 message: 'SingUp Successfully',
-                token
+                token,
+                user: userToSend
             })
         } else {
             res.status(401).json({ message: 'Error: User or Password incorrect' })

@@ -3,7 +3,9 @@ interface ISystemUser {
     user?: string
     email?: string
     password?: string
-    userName?: string
+    name?: string
+    firstSurname?: string
+    secondSurname?: string
     userType?: string
     Language?: string
 }
